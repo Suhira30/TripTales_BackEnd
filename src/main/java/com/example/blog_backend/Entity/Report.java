@@ -1,4 +1,4 @@
-package Entity;
+package com.example.blog_backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,11 +15,15 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reportId;
+
     private String description;
+
     private String title;
+
     @ManyToOne
     @JoinColumn(name="follower_id",referencedColumnName = "email")
     private Follower reportBy;
+
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name="post_id",referencedColumnName = "postId")
     private Post reportedTo;

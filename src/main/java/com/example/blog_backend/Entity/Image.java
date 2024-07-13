@@ -1,4 +1,4 @@
-package Entity;
+package com.example.blog_backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,21 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Blob;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
-
-public class User {
+@Getter
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String email;
+    private Long imgId;
 
-    private String name;
-    private String mobileNo;
-    @Enumerated(EnumType.STRING)
-    UserRole userRole;
+    @Lob
+    private Blob img;
 
+    @ManyToOne
+    @JoinColumn(name="post_id",referencedColumnName = "postId")
+    private Post post;
 
 }

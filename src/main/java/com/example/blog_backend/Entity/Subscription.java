@@ -1,4 +1,4 @@
-package Entity;
+package com.example.blog_backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,10 +18,14 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subId;
+
     @Enumerated(EnumType.STRING)
     SubscriptionStatus status;
+
     private LocalDate startDate;
+
     private LocalDate endDate;
+
     @OneToOne(mappedBy = "subscription")
     private Follower follower;
 }

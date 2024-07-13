@@ -1,5 +1,6 @@
-package Entity;
+package com.example.blog_backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -18,6 +19,8 @@ import java.util.List;
 @Getter
 public class Admin extends User{
     private Long companyId;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "postBy",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Post> post=new ArrayList<>();
 }
