@@ -1,10 +1,15 @@
 package Entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -13,4 +18,6 @@ import lombok.Setter;
 @Getter
 public class Admin extends User{
     private Long companyId;
+    @OneToMany(mappedBy = "postBy",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Post> post=new ArrayList<>();
 }

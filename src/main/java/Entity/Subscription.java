@@ -22,4 +22,6 @@ public class Subscription {
     SubscriptionStatus status;
     private LocalDate startDate;
     private LocalDate endDate;
+    @OneToOne(mappedBy = "subscription")
+    private Follower follower;
 }

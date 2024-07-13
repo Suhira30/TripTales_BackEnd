@@ -1,9 +1,6 @@
 package Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +17,10 @@ public class Report {
     private Long reportId;
     private String description;
     private String title;
-
+    @ManyToOne
+    @JoinColumn(name="follower_id",referencedColumnName = "email")
+    private Follower reportBy;
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name="post_id",referencedColumnName = "postId")
+    private Post reportedTo;
 }

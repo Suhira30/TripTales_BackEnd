@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -17,10 +19,19 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
-    private String tile;
+    private String title;
     private String description;
     private LocalDateTime postedOn=LocalDateTime.now();
     private String location;
     @Enumerated(EnumType.STRING)
     Category category;
+    @ManyToOne
+    @JoinColumn(name="admin_email",referencedColumnName = "email")
+    private Admin postBy;
+    @OneToMany(mappedBy = "reviewTo",cascade = CascadeType.DETACH,orphanRemoval = true)
+    private List<Review> review=new ArrayList<>();
+    @OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
+    private List<Image> images=new ArrayList<>();
+    @OneToMany(mappedBy = "reportedTo" ,cascade = CascadeType.DETACH,orphanRemoval = true)
+    private List<Report> reports=new ArrayList<>();
 }

@@ -19,5 +19,8 @@ public class Image {
     private Long imgId;
     @Lob
     private Blob img;
+    @ManyToOne
+    @JoinColumn(name="post_id",referencedColumnName = "postId")
+    private Post post;
 
 }
