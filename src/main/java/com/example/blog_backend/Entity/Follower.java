@@ -1,5 +1,9 @@
 package com.example.blog_backend.Entity;
 
+import com.example.blog_backend.Auth.Entity.User;
+import com.example.blog_backend.Entity.Report;
+import com.example.blog_backend.Entity.Review;
+import com.example.blog_backend.Entity.Subscription;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Follower extends User{
+public class Follower extends User {
 
     private boolean subscriptionStatus=false;
 

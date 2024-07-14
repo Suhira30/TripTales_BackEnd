@@ -1,4 +1,4 @@
-package com.example.blog_backend.Controller;
+package com.example.blog_backend.Auth.Controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 

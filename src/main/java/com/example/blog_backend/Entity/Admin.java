@@ -1,5 +1,7 @@
 package com.example.blog_backend.Entity;
 
+import com.example.blog_backend.Auth.Entity.User;
+import com.example.blog_backend.Entity.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Admin extends User{
+public class Admin extends User {
     private Long companyId;
 
     @JsonIgnore
