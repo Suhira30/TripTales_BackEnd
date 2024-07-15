@@ -25,7 +25,7 @@ private final UserRepository userRepository;
         User user=userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException("user Not found "+ username));
         RefreshToken refreshToken=user.getRefreshToken();
         if(refreshToken==null){
-          long  refreshTokenValidity=5*60*60*10000;
+          long  refreshTokenValidity=5*60*60*10000; //refresh token validity
             refreshToken=RefreshToken.builder()
                     .refreshToken(UUID.randomUUID().toString())
                     .expirationTime(Instant.now().plusMillis(refreshTokenValidity))

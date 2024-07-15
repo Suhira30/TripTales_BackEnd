@@ -61,7 +61,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 7*24*60*60*1000)) // 15 minutes
+                .setExpiration(new Date(System.currentTimeMillis() + 7*24*60*60*1000)) // 15 minutes jwt validation period
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

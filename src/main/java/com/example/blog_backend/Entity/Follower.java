@@ -5,11 +5,9 @@ import com.example.blog_backend.Entity.Report;
 import com.example.blog_backend.Entity.Review;
 import com.example.blog_backend.Entity.Subscription;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.annotation.Resource;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@Builder
 public class Follower extends User {
 
     private boolean subscriptionStatus=false;
@@ -34,5 +33,6 @@ public class Follower extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "reportBy",cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Report> reports=new ArrayList<>();
+
 
 }
