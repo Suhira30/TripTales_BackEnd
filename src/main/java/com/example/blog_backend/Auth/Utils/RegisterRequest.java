@@ -15,9 +15,8 @@ public class RegisterRequest {
     private String name;
     @Email
     private String email;
-
     private String password;
     private String mobileNo;
-
+    private Long companyId;
 
 }

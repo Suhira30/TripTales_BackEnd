@@ -18,8 +18,12 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
+@Data
 public class Follower extends User {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long followerId;
     private boolean subscriptionStatus=false;
 
     @OneToOne(cascade = CascadeType.ALL)

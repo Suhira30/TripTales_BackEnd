@@ -41,9 +41,16 @@ public class User  implements UserDetails {
     @Enumerated(EnumType.STRING)
     UserRole userRole;
 
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean isAccountNonExpired=true;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean isAccountNonLocked=true;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean isCredentialsNonExpired=true;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean isEnabled =true;
 
     @OneToOne(mappedBy = "user")

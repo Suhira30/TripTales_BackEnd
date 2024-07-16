@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class Post {
     private String location;
 
     @Enumerated(EnumType.STRING)
-    Category category;
+    List<Category> category;
 
     @ManyToOne
     @JoinColumn(name="admin_email",referencedColumnName = "email")
@@ -47,4 +48,8 @@ public class Post {
     @JsonIgnore
     @OneToMany(mappedBy = "reportedTo" ,cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Report> reports=new ArrayList<>();
+
+    public void setPostBy(Optional<Admin> admin) {
+
+    }
 }
