@@ -1,5 +1,6 @@
 package com.example.blog_backend.Entity;
 
+import com.example.blog_backend.Auth.Entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -49,7 +50,7 @@ public class Post {
     @OneToMany(mappedBy = "reportedTo" ,cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Report> reports=new ArrayList<>();
 
-    public void setPostBy(Optional<Admin> admin) {
+    public void setPostBy(Optional<User> admin) {
 
     }
 }
