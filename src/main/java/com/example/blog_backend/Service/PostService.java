@@ -36,7 +36,7 @@ public class PostService {
             post.setCategory(postDTO.getCategory());
             post.setImages(postDTO.getImages());
             post.setPostedOn(LocalDateTime.now());
-            post.setPostBy(admin);
+            post.setPostBy(admin.get().getEmail());
             Post savedPost = postRepository.save(post);
             System.out.println(savedPost);
             return savedPost;

@@ -48,7 +48,10 @@ public class Post {
     @OneToMany(mappedBy = "reportedTo" ,cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Report> reports=new ArrayList<>();
 
-    public void setPostBy(Optional<Admin> admin) {
-
+    public void setPostBy(String email) {
     }
+
+//    public void setPostBy(Optional<Admin> admin) {
+//
+//    }
 }
