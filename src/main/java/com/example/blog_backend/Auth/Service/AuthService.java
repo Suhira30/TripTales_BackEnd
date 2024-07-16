@@ -9,6 +9,7 @@ import com.example.blog_backend.Entity.Follower;
 import com.example.blog_backend.Repository.FollowerRepository;
 import lombok.Builder;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +25,14 @@ public class AuthService {
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
     private final AuthenticationManager authenticationManager;
+    public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository, FollowerRepository followerRepository, JwtService jwtService, RefreshTokenService refreshTokenService, @Lazy AuthenticationManager authenticationManager) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.followerRepository = followerRepository;
+        this.jwtService = jwtService;
+        this.refreshTokenService = refreshTokenService;
+        this.authenticationManager = authenticationManager;
+    }
     public AuthResponse registerFollower(RegisterRequest registerRequest){
         var user= new Follower();
         user.setName(registerRequest.getName());

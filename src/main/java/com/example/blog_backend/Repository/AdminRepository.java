@@ -11,5 +11,4 @@ import java.util.Optional;
 @Repository
 public interface AdminRepository extends UserRepository {
 
-    Optional<User> findByEmail(String email);
 }
