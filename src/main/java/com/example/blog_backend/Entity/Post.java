@@ -51,7 +51,5 @@ public class Post {
     public void setPostBy(String email) {
     }
 
-//    public void setPostBy(Optional<Admin> admin) {
-//
-//    }
+
 }
