@@ -2,7 +2,6 @@ package com.example.blog_backend.Service;
 
 import com.example.blog_backend.Auth.Entity.User;
 import com.example.blog_backend.DTO.PostDTO;
-import com.example.blog_backend.Entity.Admin;
 import com.example.blog_backend.Entity.Post;
 import com.example.blog_backend.Repository.AdminRepository;
 import com.example.blog_backend.Repository.PostRepository;
@@ -11,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -51,5 +50,18 @@ public class PostService {
            return userDetails.getUsername();
        }
        throw new RuntimeException("No authenticated user found ");
+    }
+
+    public List<PostDTO> getLAtestPost() {
+        List<Post> posts= postRepository.findTop10ByOrderByIdDesc();
+        List<PostDTO> postDTOs = posts.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return postDTOs;
+    }
+
+    private PostDTO convertToDTO(Post post) {
+    PostDTO postDTO=new PostDTO();
+        postDTO.setTitle(post.getTitle());
+        postDTO.setLocation(post.getLocation());
+        return postDTO;
     }
 }
