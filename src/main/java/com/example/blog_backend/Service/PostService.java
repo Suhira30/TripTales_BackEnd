@@ -27,7 +27,7 @@ public class PostService {
     public Post addPost(PostDTO postDTO) {
         String adminMail = getAuthenticatedAdminEmail();
 //        Post savedPost;
-        Optional<Admin> admin = adminRepository.findByEmail(adminMail);
+        Optional<User> admin = adminRepository.findByEmail(adminMail);
         if(admin.isPresent()) {
             Post post = new Post();
             post.setTitle(postDTO.getTitle());
