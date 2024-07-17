@@ -49,8 +49,11 @@ public class Post {
     private List<Report> reports=new ArrayList<>();
 
     public void setPostBy(String email) {
-
+        this.setPostBy(email);
     }
 
-
+//    public void setPostBy(String email) {
+//    }
+//
+//    }
 }
