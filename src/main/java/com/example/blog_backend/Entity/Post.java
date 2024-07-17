@@ -10,7 +10,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @AllArgsConstructor
@@ -50,7 +49,11 @@ public class Post {
     private List<Report> reports=new ArrayList<>();
 
     public void setPostBy(String email) {
+        this.setPostBy(email);
     }
 
-    }
+//    public void setPostBy(String email) {
+//    }
+//
+//    }
 }
