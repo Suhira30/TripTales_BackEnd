@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class PostService {
             post.setDescription(postDTO.getDescription());
             post.setLocation(postDTO.getLocation());
             post.setCategory(postDTO.getCategory());
-            post.setImages(postDTO.getImages());
+            post.setImg((Blob) postDTO.getImage());
             post.setPostedOn(LocalDateTime.now());
             post.setPostBy(admin.get().getEmail());
             Post savedPost = postRepository.save(post);
@@ -52,11 +53,11 @@ public class PostService {
        throw new RuntimeException("No authenticated user found ");
     }
 
-    public List<PostDTO> getLAtestPost() {
-        List<Post> posts= postRepository.findTop10ByOrderByIdDesc();
-        List<PostDTO> postDTOs = posts.stream().map(this::convertToDTO).collect(Collectors.toList());
-        return postDTOs;
-    }
+//    public List<PostDTO> getLatestPost() {
+//        List<Post> posts= postRepository.findTop10ByOrderByIdDesc();
+//        List<PostDTO> postDTOs = posts.stream().map(this::convertToDTO).collect(Collectors.toList());
+//        return postDTOs;
+//    }
 
     private PostDTO convertToDTO(Post post) {
     PostDTO postDTO=new PostDTO();
@@ -64,4 +65,6 @@ public class PostService {
         postDTO.setLocation(post.getLocation());
         return postDTO;
     }
+
+
 }

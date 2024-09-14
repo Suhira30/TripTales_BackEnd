@@ -21,8 +21,12 @@ public class Image {
     @Lob
     private Blob img;
 
-    @ManyToOne
-    @JoinColumn(name="post_id",referencedColumnName = "postId")
-    private Post post;
+    private String location;
+
+    private String description;
+//
+//    @ManyToOne
+//    @JoinColumn(name="post_id",referencedColumnName = "postId")
+//    private Post post;
 
 }

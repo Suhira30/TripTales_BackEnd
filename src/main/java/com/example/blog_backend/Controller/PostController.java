@@ -20,10 +20,10 @@ private final PostService postService;
         Post newPost=postService.addPost(postDTO);
         return ResponseEntity.ok(newPost);
     }
-    @GetMapping("/latest")
-    public ResponseEntity<PostDTO> getLAtestPost(){
-        List<PostDTO> latestPost=postService.getLAtestPost();
-        return ResponseEntity.ok((PostDTO) latestPost);
-    }
+//    @GetMapping("/latest")
+//    public ResponseEntity<PostDTO> getLatestPost(){
+//        List<PostDTO> latestPost=postService.getLatestPost();
+//        return ResponseEntity.ok((PostDTO) latestPost);
+//    }
 
 }

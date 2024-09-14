@@ -28,4 +28,10 @@ public class Subscription {
 
     @OneToOne(mappedBy = "subscription")
     private Follower follower;
+
+//    @OneToOne(mappedBy = "payment")
+//    private Payment payment;
+    private String stripeCustomerId; // To store Stripe customer ID
+    private String stripeSubscriptionId; // To store Stripe subscription ID
+    private Double amount;
 }

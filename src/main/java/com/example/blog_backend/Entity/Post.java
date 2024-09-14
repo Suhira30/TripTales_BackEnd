@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,12 @@ public class Post {
     @OneToMany(mappedBy = "reviewTo",cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Review> review=new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
-    private List<Image> images=new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
+//    private List<Image> images=new ArrayList<>();
+
+    @Lob
+    private Blob img;
 
     @JsonIgnore
     @OneToMany(mappedBy = "reportedTo" ,cascade = CascadeType.DETACH,orphanRemoval = true)
@@ -51,6 +55,8 @@ public class Post {
     public void setPostBy(String email) {
         this.setPostBy(email);
     }
+
+
 
 //    public void setPostBy(String email) {
 //    }

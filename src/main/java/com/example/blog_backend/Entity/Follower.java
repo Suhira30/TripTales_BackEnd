@@ -11,6 +11,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @AllArgsConstructor
@@ -37,6 +38,7 @@ public class Follower extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "reportBy",cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Report> reports=new ArrayList<>();
+
 
 
 }

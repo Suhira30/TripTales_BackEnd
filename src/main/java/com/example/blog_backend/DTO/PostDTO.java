@@ -18,5 +18,5 @@ public class PostDTO {
     private String description;
     private String location;
     private List<Category> category;
-    private List<Image> images;
+    private Image image;
 }

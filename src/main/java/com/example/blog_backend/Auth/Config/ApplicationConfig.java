@@ -22,33 +22,23 @@ import java.util.Optional;
 
 @Configuration
 public class ApplicationConfig {
-    private final UserRepository userRepository;
+//    private final UserRepository userRepository;
     private final AdminRepository adminRepository;
     private final FollowerRepository followerRepository;
 
     public ApplicationConfig(UserRepository userRepository, AdminRepository adminRepository, FollowerRepository followerRepository) {
-        this.userRepository = userRepository;
+//        this.userRepository = userRepository;
         this.adminRepository = adminRepository;
         this.followerRepository = followerRepository;
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        return username ->userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException("user not found with email :"+username));
-//    }
+
+
+    //-----------------manage authentication request - by authentication manager-----------------
+    // AuthenticationManager is a bean,interface managed by Spring container-------------------------------
     @Bean
-    public UserDetailsService userDetailsService(){
-        return username -> {
-            Optional<User> admin=adminRepository.findByEmail(username);
-            if(admin.isPresent()){
-                return admin.get();
-            }
-            Optional <Follower> follower=followerRepository.findByEmail(username);
-            if(follower.isPresent()){
-                return follower.get();
-            }
-            throw new UsernameNotFoundException("user not found with email :"+username);
-        };
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+        return config.getAuthenticationManager();
     }
     @Bean
     public AuthenticationProvider authenticationProvider(){
@@ -57,15 +47,25 @@ public class ApplicationConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
-
     @Bean
-
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
-    return config.getAuthenticationManager();
+    public UserDetailsService userDetailsService(){
+        return username -> {
+            Optional<User> admin=adminRepository.findByEmail(username);
+            if(admin.isPresent()){
+                return admin.get();
+            }
+            Optional <User> follower=followerRepository.findByEmail(username);
+            if(follower.isPresent()){
+                return follower.get();
+            }
+            throw new UsernameNotFoundException("user not found with email :"+username);
+        };
     }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
+
 }

@@ -43,7 +43,7 @@ public class AuthService {
     }
     public AuthResponse registerFollower(RegisterRequest registerRequest){
         String email= registerRequest.getEmail();
-        Optional<Follower> follower=followerRepository.findByEmail(email);
+        Optional<User> follower=followerRepository.findByEmail(email);
         if(!(follower.isPresent())){
             try {
                 var user = new Follower();
