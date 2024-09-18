@@ -43,7 +43,7 @@ public class ApplicationConfig {
             if(admin.isPresent()){
                 return admin.get();
             }
-            Optional <Follower> follower=followerRepository.findByEmail(username);
+            Optional<User> follower=followerRepository.findByEmail(username);
             if(follower.isPresent()){
                 return follower.get();
             }
