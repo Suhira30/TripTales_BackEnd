@@ -1,13 +1,9 @@
 package com.example.blog_backend.DTO;
-
 import com.example.blog_backend.Entity.Category;
-//import com.example.blog_backend.Entity.Continent;
-import com.example.blog_backend.Entity.Image;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.List;
 @Getter

@@ -41,7 +41,7 @@ public class ReviewService {
        else{
            throw new RuntimeException("User is not a follower");
         }
-        Post post=postRepository.findById(reviewDTO.getPostId())
+        Post post=postRepository.findById(reviewDTO.getReviewTo().getPostId())
                                 .orElseThrow(()->new RuntimeException("post is not founded"));
         newReview.setReviewTo(post);
         reviewRepository.save(newReview);

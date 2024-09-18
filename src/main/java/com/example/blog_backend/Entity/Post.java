@@ -39,7 +39,7 @@ public class Post {
 
     @Enumerated(EnumType.STRING)
     List<Category> category;
-
+    private String imgUrl;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name="admin_email",referencedColumnName = "email")
@@ -49,10 +49,10 @@ public class Post {
     @OneToMany(mappedBy = "reviewTo",cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Review> review=new ArrayList<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
-    private List<Image> images=new ArrayList<>();
-    private String imgUrl;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
+//    private List<Image> images=new ArrayList<>();
+//    private String imgUrl;
 
 
     @JsonIgnore

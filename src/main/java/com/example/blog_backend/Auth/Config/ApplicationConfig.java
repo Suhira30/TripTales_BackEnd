@@ -39,7 +39,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService(){
         return username -> {
-            Optional <Admin> admin=adminRepository.findByEmail(username);
+            Optional<User> admin=adminRepository.findByEmail(username);
             if(admin.isPresent()){
                 return admin.get();
             }
