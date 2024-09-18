@@ -24,9 +24,16 @@ public class Post {
 
     private String title;
 
-    private String description;
+    @Column(length = 2000)
+    private String guide;
+
+    @Column(length = 2000)
+    private String experience;
 
     private LocalDateTime postedOn=LocalDateTime.now();
+
+//    @Enumerated(EnumType.STRING)
+//    private Continent continent;
 
     private String location;
 
@@ -34,6 +41,7 @@ public class Post {
     List<Category> category;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="admin_email",referencedColumnName = "email")
     private Admin postBy;
 
@@ -44,13 +52,13 @@ public class Post {
     @JsonIgnore
     @OneToMany(mappedBy = "post" ,cascade = CascadeType.ALL)
     private List<Image> images=new ArrayList<>();
+    private String imgUrl;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "reportedTo" ,cascade = CascadeType.DETACH,orphanRemoval = true)
     private List<Report> reports=new ArrayList<>();
 
-    public void setPostBy(String email) {
-    }
 
-    }
+
 }
