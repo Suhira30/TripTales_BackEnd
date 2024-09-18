@@ -2,8 +2,6 @@ package com.example.blog_backend.Auth.Config;
 
 import com.example.blog_backend.Auth.Entity.User;
 import com.example.blog_backend.Auth.Repository.UserRepository;
-import com.example.blog_backend.Entity.Admin;
-import com.example.blog_backend.Entity.Follower;
 import com.example.blog_backend.Repository.AdminRepository;
 import com.example.blog_backend.Repository.FollowerRepository;
 import org.springframework.context.annotation.Bean;
