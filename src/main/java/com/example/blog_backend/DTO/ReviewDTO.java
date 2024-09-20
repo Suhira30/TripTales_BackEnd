@@ -5,23 +5,21 @@ import com.example.blog_backend.Entity.Post;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ReviewDTO {
     private Long reviewId;
     private String description;
     private LocalDateTime postedAt;
-    private Post reviewTo;
-    private Follower reviewBy;
+    private Long reviewTo;
+    private String reviewBy;
 
-    public ReviewDTO(Long reviewId, String description, LocalDateTime postedAt, Long postId, String email) {
-    }
+
+
 }

@@ -32,8 +32,8 @@ public class Post {
 
     private LocalDateTime postedOn=LocalDateTime.now();
 
-//    @Enumerated(EnumType.STRING)
-//    private Continent continent;
+    @Enumerated(EnumType.STRING)
+    private Continent continent;
 
     private String location;
 

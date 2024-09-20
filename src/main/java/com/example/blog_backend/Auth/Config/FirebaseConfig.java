@@ -14,18 +14,14 @@ public class FirebaseConfig {
 
     @Bean
     public FirebaseApp firebaseApplication() throws IOException {
-        // Check if the default app already exists
-        if (FirebaseApp.getApps().isEmpty()) {
-            FileInputStream serviceAccount =
-                    new FileInputStream("src/main/resources/traveltales-blog-firebase-adminsdk.json");
+        FileInputStream serviceAccount =
+                new FileInputStream("src/main/resources/traveltales-blog-firebase-adminsdk.json");
 
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .build();
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setStorageBucket("blogtraveltales.appspot.com") // Set your Firebase Storage bucket here
+                .build();
 
-            return FirebaseApp.initializeApp(options);
-        }
-
-        return FirebaseApp.getInstance();
+        return FirebaseApp.initializeApp(options);
     }
 }

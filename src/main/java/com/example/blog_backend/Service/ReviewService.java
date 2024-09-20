@@ -12,10 +12,14 @@ import com.example.blog_backend.Repository.PostRepository;
 import com.example.blog_backend.Repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +35,7 @@ public class ReviewService {
     //--------------------------------add review ---------------------------------------
     public ReviewDTO addReview(ReviewDTO reviewDTO, String currentPrincipalName) {
     Review newReview =new Review();
+//        newReview.setReviewTo(reviewDTO.getReviewTo());
         newReview.setDescription(reviewDTO.getDescription());
         newReview.setPostedAt(LocalDateTime.now());
         User follower=followerRepository.findById(currentPrincipalName)
@@ -41,11 +46,16 @@ public class ReviewService {
        else{
            throw new RuntimeException("User is not a follower");
         }
-        Post post=postRepository.findById(reviewDTO.getReviewTo().getPostId())
+        if (reviewDTO.getReviewTo() == null) {
+            throw new RuntimeException("Review does not have an associated post");
+        }
+
+        Post post=postRepository.findById(reviewDTO.getReviewTo())
                                 .orElseThrow(()->new RuntimeException("post is not founded"));
         newReview.setReviewTo(post);
         reviewRepository.save(newReview);
         return reviewDTO;
+
     }
 
     //--------------------------------remove review -----------------------------------------------
@@ -61,18 +71,24 @@ public class ReviewService {
     }
     //--------------------------------All review -------------------------------------------------
     public List<ReviewDTO> getAll() {
-        List<Review> reviews= reviewRepository.findAllByOrderByReviewIdDesc();
-        return reviews.stream().map(this::convertToDTO).toList();
+        List<Review> reviews = reviewRepository.findAll(Sort.by(Sort.Direction.DESC, "reviewId"));
+
+        return reviews.stream()
+                .map(review -> {
+                    Long postId = review.getReviewTo() != null ? review.getReviewTo().getPostId() : null;
+                    String email = review.getReviewBy() != null ? review.getReviewBy().getEmail() : null;
+
+                    return ReviewDTO.builder()
+                            .reviewId(review.getReviewId())
+                            .reviewBy(email)
+                            .reviewTo(postId)
+                            .description(review.getDescription())
+                            .postedAt(review.getPostedAt())
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
-    private ReviewDTO convertToDTO(Review review) {
-        return new ReviewDTO(
-                review.getReviewId(),
-                review.getDescription(),
-                review.getPostedAt(),
-                review.getReviewTo().getPostId(), // Assuming Post has a getPostId method
-                review.getReviewBy().getEmail()   // Assuming Follower has a getEmail method
-        );
-    }
+
     //--------------------------------remove review ADMIN ------------------------------------------
     public void removeReviewByAdmin(Long id, String mail) {
         Review review=reviewRepository.findById(id)

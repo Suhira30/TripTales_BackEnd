@@ -46,6 +46,7 @@ public class AuthService {
         user.setName(registerRequest.getName());
         user.setEmail(registerRequest.getEmail());
         user.setMobileNo(registerRequest.getMobileNo());
+        user.setUserRole(UserRole.FOLLOWER);
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
         User savedUser= followerRepository.save(user);

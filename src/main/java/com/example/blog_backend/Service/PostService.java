@@ -54,7 +54,7 @@ public class PostService {
         newPost.setGuide(postDTO.getGuide());
         newPost.setLocation(postDTO.getLocation());
         newPost.setCategory(postDTO.getCategory());
-//        newPost.setContinent(postDTO.getContinent());
+        newPost.setContinent(postDTO.getContinent());
         newPost.setPostedOn(LocalDateTime.now());
         if (imageFile != null && !imageFile.isEmpty()) {
             String imageUrl = uploadImageToFirebase(imageFile);
@@ -87,13 +87,13 @@ public class PostService {
     }
     //--------------------------------LAST POST---------------------------------------------
     public PostDTO getLastPost() {
-        Post lastPost=postRepository.findTopByOrderByPostedOnDesc();
+        Post lastPost=postRepository.getLastPost();
         return covertToDTO(lastPost);
     }
     public PostDTO covertToDTO(Post lastPost){
         return new PostDTO(
           lastPost.getTitle(),
-//          lastPost.getContinent(),
+          lastPost.getContinent(),
           lastPost.getImgUrl(),
           lastPost.getLocation(),
           lastPost.getPostedOn()
