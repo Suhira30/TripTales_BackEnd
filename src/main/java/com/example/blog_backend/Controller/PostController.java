@@ -1,6 +1,8 @@
 package com.example.blog_backend.Controller;
 
 import com.example.blog_backend.DTO.PostDTO;
+import com.example.blog_backend.Entity.Category;
+import com.example.blog_backend.Entity.Continent;
 import com.example.blog_backend.Entity.Post;
 import com.example.blog_backend.Service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -27,25 +29,54 @@ import java.util.List;
 @CrossOrigin("*")
 public class PostController {
     @Autowired
-private final PostService postService;
-//--------------------------------ADD POST---------------------------------------------
+    private final PostService postService;
+
+    //--------------------------------ADD POST---------------------------------------------
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Post> addPost(@RequestPart("postDTO") PostDTO postDTO, @RequestPart("imageFile") MultipartFile imageFile) throws IOException {
-        Post newPost=postService.addPost(postDTO,imageFile);
+        Post newPost = postService.addPost(postDTO, imageFile);
         return ResponseEntity.ok(newPost);
     }
 
-//--------------------------------NO OF POST---------------------------------------------
+    //--------------------------------NO OF POST---------------------------------------------
     @GetMapping("/noof_post")
-    public ResponseEntity<Integer> getNoOfPost(){
-        int tot= postService.getNoOfPost();
+    public ResponseEntity<Integer> getNoOfPost() {
+        int tot = postService.getNoOfPost();
         return ResponseEntity.ok(tot);
     }
-//--------------------------------LAST POST---------------------------------------------
-@GetMapping("/lastPost")
-    public ResponseEntity<PostDTO> getLastPost(){
+
+    //--------------------------------LAST POST---------------------------------------------
+    @GetMapping("/lastPost")
+    public ResponseEntity<PostDTO> getLastPost() {
 //        PostDTO lastPost=postService.getLastPost();
         return ResponseEntity.ok(postService.getLastPost());
-}
+    }
 
+    //--------------------------------POST BY CATEGORY---------------------------------------------
+    @GetMapping("/postByCategory/{category}")
+    public ResponseEntity<List<PostDTO>> getPostByCategory(@PathVariable("category") Category category) {
+        return ResponseEntity.ok(postService.getPostByCategory(category));
+    }
+    //--------------------------------POST BY GEOGRAPHICAL AREA---------------------------------------
+    @GetMapping("/postByArea/{continent}")
+    public ResponseEntity<List<PostDTO>> getPostByArea(@PathVariable("continent") Continent continent) {
+        return ResponseEntity.ok(postService.getPostByArea(continent));
+    }
+    //--------------------------------EACH POST DETAIL---------------------------------------
+    @GetMapping("/eachPost/{postId}")
+    public ResponseEntity<PostDTO> getEachPostDetail(@PathVariable Long postId) {
+        return ResponseEntity.ok(postService.getEachPostDetail(postId));
+    }
+
+    //------------------------------------------ALL POST---------------------------------------------
+    @GetMapping("/allpost")
+    public ResponseEntity<List<PostDTO>> getAllPost() {
+        return ResponseEntity.ok(postService.getAllPost());
+    }
+
+
+    @GetMapping("/poppularPost")
+    public ResponseEntity<List<PostDTO>> getPoppularPost() {
+        return ResponseEntity.ok(postService.getPoppularPost());
+    }
 }

@@ -1,18 +1,17 @@
 package com.example.blog_backend.DTO;
 import com.example.blog_backend.Entity.Category;
 import com.example.blog_backend.Entity.Continent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PostDTO {
-
+private Long postId;
     private String title;
     private String guide;
     private String experience;
