@@ -109,7 +109,6 @@
             <version>9.0.0</version> <!-- Replace with the latest version -->
         </dependency>
 
-
         <!--Stripe -->
         <dependency>
             <groupId>com.stripe</groupId>
@@ -117,12 +116,18 @@
             <version>5.21.0</version>
         </dependency>
 
-        <!--Firebase -->
+        <!--Websocket -->
         <dependency>
-            <groupId>com.google.firebase</groupId>
-            <artifactId>firebase-admin</artifactId>
-            <version>9.0.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+
+<!--        &lt;!&ndash;Firebase &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.firebase</groupId>-->
+<!--            <artifactId>firebase-admin</artifactId>-->
+<!--            <version>9.0.0</version>-->
+<!--        </dependency>-->
 
 
     </dependencies>

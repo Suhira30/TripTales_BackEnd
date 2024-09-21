@@ -13,12 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.service.annotation.PostExchange;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.service.annotation.PostExchange;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -74,7 +70,7 @@ public class PostController {
         return ResponseEntity.ok(postService.getAllPost());
     }
 
-
+    //------------------------------------------POPULAR POST---------------------------------------------
     @GetMapping("/poppularPost")
     public ResponseEntity<List<PostDTO>> getPoppularPost() {
         return ResponseEntity.ok(postService.getPoppularPost());
