@@ -32,7 +32,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
     private final AuthenticationManager authenticationManager;
-    private final AdminRepository adminRepository;
+
 
     public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository, FollowerRepository followerRepository, AdminRepository adminRepository, JwtService jwtService, RefreshTokenService refreshTokenService, @Lazy AuthenticationManager authenticationManager) {
         this.passwordEncoder = passwordEncoder;
@@ -42,7 +42,7 @@ public class AuthService {
         this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
         this.authenticationManager = authenticationManager;
-        this.adminRepository = adminRepository;
+
     }
     public AuthResponse registerFollower(RegisterRequest registerRequest){
         var user= new Follower();
