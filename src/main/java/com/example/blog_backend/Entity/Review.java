@@ -20,7 +20,7 @@ public class Review {
 
     private String description;
 
-    private Double rating;
+//    private Double rating;
 
     private LocalDateTime postedAt;
 

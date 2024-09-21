@@ -32,6 +32,8 @@ public class AuthService {
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
     private final AuthenticationManager authenticationManager;
+    private final AdminRepository adminRepository;
+
     public AuthService(PasswordEncoder passwordEncoder, UserRepository userRepository, FollowerRepository followerRepository, AdminRepository adminRepository, JwtService jwtService, RefreshTokenService refreshTokenService, @Lazy AuthenticationManager authenticationManager) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -40,20 +42,16 @@ public class AuthService {
         this.jwtService = jwtService;
         this.refreshTokenService = refreshTokenService;
         this.authenticationManager = authenticationManager;
+        this.adminRepository = adminRepository;
     }
     public AuthResponse registerFollower(RegisterRequest registerRequest){
-        String email= registerRequest.getEmail();
-        Optional<Follower> follower=followerRepository.findByEmail(email);
-        if(!(follower.isPresent())){
-            try {
-                var user = new Follower();
-                user.setName(registerRequest.getName());
-                user.setEmail(registerRequest.getEmail());
-                user.setMobileNo(registerRequest.getMobileNo());
-                user.setUserRole(UserRole.FOLLOWER);
-                user.setSubscriptionStatus(false);
-                user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-
+        var user= new Follower();
+        user.setName(registerRequest.getName());
+        user.setEmail(registerRequest.getEmail());
+        user.setMobileNo(registerRequest.getMobileNo());
+        user.setUserRole(UserRole.FOLLOWER);
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+      
                 User savedUser = followerRepository.save(user);
                 var accessToken = jwtService.generateToken(savedUser);
                 var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
@@ -62,15 +60,8 @@ public class AuthService {
                         .accessToken(accessToken)
                         .refreshToken(refreshToken.getRefreshToken())
                         .build();
-            } catch (DataIntegrityViolationException exception) {
-                throw new RuntimeException("Already have account ");
-            }
-
-        }else{
-            throw new RuntimeException("Suspended");
-        }
-    }
-
+            } 
+  
     public AuthResponse registerAdmin(RegisterRequest registerRequest){
         String email= registerRequest.getEmail();
         Optional<User> admin=adminRepository.findByEmail(email);
@@ -82,6 +73,7 @@ public class AuthService {
                 user.setMobileNo(registerRequest.getMobileNo());
                 user.setUserRole(UserRole.FOLLOWER);
                 user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+
 
                 User savedUser = adminRepository.save(user);
                 var accessToken = jwtService.generateToken(savedUser);
@@ -117,7 +109,9 @@ public class AuthService {
                 .build();
     }
 
+
     public AuthResponse loginAdmin(LoginRequest loginRequest){
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
