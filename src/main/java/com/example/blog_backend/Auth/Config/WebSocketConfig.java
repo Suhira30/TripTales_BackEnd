@@ -19,13 +19,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*");//This endpoint allows clients to connect to the server using WebSocket for real-time communication.
+        //registry.addEndpoint("/ws").setAllowedOriginPatterns("*");//This endpoint allows clients to connect to the server using WebSocket for real-time communication.
         registry.addEndpoint("/ws").setAllowedOriginPatterns("*").withSockJS();//provides a fallback mechanism for environments where WebSocket is not supported
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/user","/topic");//clients subscribed to destinations starting with "/user" will receive messages from the broker.
+//        registry.enableSimpleBroker("/user","/topic");//clients subscribed to destinations starting with "/user" will receive messages from the broker.
+//        registry.setApplicationDestinationPrefixes("/app");//When clients send messages, they will start with "/app". This helps the server know how to handle incoming messages based on their destination.
+        registry.enableSimpleBroker("/user","/chatroom");//clients subscribed to destinations starting with "/user" will receive messages from the broker.
         registry.setApplicationDestinationPrefixes("/app");//When clients send messages, they will start with "/app". This helps the server know how to handle incoming messages based on their destination.
         registry.setUserDestinationPrefix("/user");//if a user sends a message to a destination starting with "/user", it will be handled in a special way, likely for direct user-to-user communication.
     }
