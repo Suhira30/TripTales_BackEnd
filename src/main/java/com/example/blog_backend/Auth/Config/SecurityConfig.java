@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**", "/api/v1/subscriptions/**", "/api/v1/post/**","/api/v1/**")
+                        .requestMatchers("/api/v1/auth/**", "/api/v1/subscriptions/**", "/api/v1/post/**","/api/v1/**","/ws/**")
                         .permitAll() // Public routes
                         .anyRequest()
                         .authenticated()) // Other routes need authentication
