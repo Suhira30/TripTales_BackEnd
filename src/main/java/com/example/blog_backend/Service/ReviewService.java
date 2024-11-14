@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
 
+
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
@@ -103,5 +104,18 @@ public class ReviewService {
             }
 
     }
-
+//--------------------------------reterive review by postid----------------------------------------
+    public List<ReviewDTO> fetchReviewByPost(Long postId) {
+        List<Review> reviews= reviewRepository.findByPostId(postId);
+        return reviews.stream()
+                .map(this::mapToReviewDTO)
+                .collect(Collectors.toList());
+    }
+    private ReviewDTO mapToReviewDTO(Review review) {
+        return ReviewDTO.builder()
+                .reviewBy(review.getReviewBy().getEmail())
+                .description(review.getDescription())
+                .postedAt(review.getPostedAt())
+                .build();
+    }
 }

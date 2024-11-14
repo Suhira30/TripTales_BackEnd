@@ -27,27 +27,27 @@ public class PostController {
     @Autowired
     private final PostService postService;
 
-    //--------------------------------ADD POST---------------------------------------------
+    //--------------------------------ADMIN : ADD POST---------------------------------------------
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Post> addPost(@RequestPart("postDTO") PostDTO postDTO, @RequestPart("imageFile") MultipartFile imageFile) throws IOException {
         Post newPost = postService.addPost(postDTO, imageFile);
         return ResponseEntity.ok(newPost);
     }
 
-    //--------------------------------NO OF POST------------------------------------------------------
+    //--------------------------------ADMIN : NO OF POST------------------------------------------------------
     @GetMapping("/noof_post")
     public ResponseEntity<Integer> getNoOfPost() {
         int tot = postService.getNoOfPost();
         return ResponseEntity.ok(tot);
     }
 
-    //--------------------------------LAST POST------------------------------------------------------
+    //--------------------------------ADMIN : LAST POST------------------------------------------------------
     @GetMapping("/lastPost")
     public ResponseEntity<PostDTO> getLastPost() {
 //        PostDTO lastPost=postService.getLastPost();
         return ResponseEntity.ok(postService.getLastPost());
     }
-
+    //--------------------------------POST BY CATEGORY------------------------------------------------------
     @GetMapping("/postByCategory/{category}")
     public ResponseEntity<List<PostDTO>> getPostByCategory(@PathVariable("category") Category category) {
         return ResponseEntity.ok(postService.getPostByCategory(category));

@@ -48,5 +48,9 @@ public class ReviewController {
         reviewService.removeReviewByAdmin(Id,currentPrincipalName);
         return ResponseEntity.noContent().build();
     }
-
+    //--------------------------------reterive review by postid----------------------------------------
+    @GetMapping("/byPost/{postId}")
+    public ResponseEntity<List<ReviewDTO>> fetchReviewByPost(@PathVariable Long postId){
+        return ResponseEntity.ok( reviewService.fetchReviewByPost(postId));
+    }
 }
