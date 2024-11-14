@@ -21,5 +21,8 @@ public class ReviewDTO {
     private String reviewBy;
 
 
-
+    public ReviewDTO(String description, String reviewBy) {
+        this.description= description;
+        this.reviewBy=reviewBy;
+    }
 }
