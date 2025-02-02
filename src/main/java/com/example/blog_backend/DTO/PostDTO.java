@@ -22,8 +22,8 @@ private Long postId;
     private LocalDateTime postedOn;
 
 
-    public PostDTO(String title, Continent continent, String imgUrl, String location, LocalDateTime postedOn) {
-    }
+//    public PostDTO(String title, Continent continent, String imgUrl, String location, LocalDateTime postedOn) {
+//    }
 
 
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*0")
+@CrossOrigin("*")
 @RequestMapping("/api/v1/image")
 public class ImageController {
     @Autowired
